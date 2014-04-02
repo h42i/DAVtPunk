@@ -1,0 +1,27 @@
+# !/bin/bash
+
+# 2014-04-02 nanooq
+
+# 
+# This script, to be started manually ftps all
+# to wau.hasi
+#
+
+source "./config"
+
+cd "${myfolderonsource}" 
+ftp --no-prompt --no-login --verbose "${myftp}" <<EOF
+quote user "${myftpuser}"
+quote pass "{$myftppass}"
+cd "${myfolderonftp}"
+mput *.*
+bye
+EOF
+
+success="$?"
+echo "${myfolderonsource}"
+
+if [ "${success}" -eq 0 ]
+then
+  $(find "${myfolderonsource}" -type f -iname "*.jpeg" -exec rm {} \;)
+fi

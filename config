@@ -1,0 +1,33 @@
+# 2014-03-31 nanooq
+
+#
+# This file collects configs to be used by scripts
+#
+
+# Files needed:
+#
+#   ~/.ssh/hasi.it # SSH key without passphrase
+#   ~/.ssh/config  # config to find 'hasi' in the web
+
+# Variables
+
+# web-server
+mywebserver='hasi'
+myfolderonwebserver='/home/h42i/html/kletterhalle/'
+mywebpageimg='latest.jpeg'
+
+
+myfolderonsource='/home/hasi/DAVtPunk/'
+myfileprefix='DAVtPhoto_'
+myfilesuffix='.jpeg'
+# video device
+myv1='/dev/video0'
+myv1colors='16'
+
+# ftp-server
+myftp='10.23.42.104' 
+#wau.hasi
+myftpuser='anonymous'
+myftppass='davtpie@hasi.it'
+myfolderonftp='/media/DAVtPunk'
+mydefaultoffset='-1hour'

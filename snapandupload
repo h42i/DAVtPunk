@@ -1,0 +1,37 @@
+# !/bin/bash
+
+# 2014-03-31 nanooq
+
+source ./config
+
+#
+# This script will take a picture and upload it to 
+# hasi.it
+#
+
+# Files needed:
+#
+#   ~/.ssh/hasi.it # SSH key without passphrase
+#   ~/.ssh/config  # config to find 'hasi' in the web
+
+
+# Variables
+
+myfilename="${myfolderonsource}""${myfileprefix}""$(date +%Y-%m-%d_%H-%M-%S)""${myfilesuffix}"
+
+echo "myfilename:"${myfilename}
+###############################################
+
+#
+# Take a picture
+#
+
+streamer -c "${myv1}" -b "${myv1colors}" -o "${myfilename}"
+
+#
+# Upload taken picture
+#
+
+scp "${myfilename}" "${mywebserver}":"${myfolderonwebserver}""${mywebpageimg}"
+
+exit $?
