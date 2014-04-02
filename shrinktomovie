@@ -1,0 +1,45 @@
+# !/bin/bash
+
+source /home/hasi/DAVtPunk/config
+
+# Variables
+
+mydate="${1}"
+# 2014-03-31
+mytempfolder="${myfileprefix}""${mydate}"
+mymoviefile="${mytempfolder}"'.mp4'
+myfolderonftptoget="${myfolderonftp}""${myfileprefix}""${mydate}"'/'
+
+mkdir "${mytempfolder}"
+cd "${mytempfolder}"
+
+ftp --no-prompt --no-login --verbose "${myftp}" <<EOF
+quote user "${myftpuser}"
+quote pass "{$myftppass}"
+cd "${myfolderonftptoget}"
+mget "*.jpeg"
+bye
+EOF
+
+$(cat *.jpeg | ffmpeg -f image2pipe -r 4 -vcodec mjpeg -i - -vcodec libx264 "${mymoviefile}")
+
+mv "${mymoviefile}" ../
+
+cd ..
+
+rm -rf "${mytempfolder}"
+
+# FTP to wau.hasi
+
+echo "${myfolderonftp}""${myftpmovies}"
+ftp --no-prompt --no-login --verbose "${myftp}" <<EOF
+quote user "${myftpuser}"
+quote pass "{$myftppass}"
+cd "${myfolderonftp}"
+cd "${myftpmovies}"
+mput "${mymoviefile}"
+bye
+EOF
+
+rm "${mymoviefile}"
+

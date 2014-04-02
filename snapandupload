@@ -2,36 +2,32 @@
 
 # 2014-03-31 nanooq
 
-source ./config
+source /home/hasi/DAVtPunk/config
 
 #
-# This script will take a picture and upload it to 
-# hasi.it
+# This script will take a picture and scp it to 
+# hasi.it. It returns exit code from scp.
 #
-
-# Files needed:
-#
-#   ~/.ssh/hasi.it # SSH key without passphrase
-#   ~/.ssh/config  # config to find 'hasi' in the web
-
 
 # Variables
 
 myfilename="${myfolderonsource}""${myfileprefix}""$(date +%Y-%m-%d_%H-%M-%S)""${myfilesuffix}"
+myfiletemp="${myfolderonsource}""${mywebpageimg}""${myfilesuffix}"
 
-echo "myfilename:"${myfilename}
-###############################################
+echo $myfiletemp
 
-#
 # Take a picture
-#
 
-streamer -c "${myv1}" -b "${myv1colors}" -o "${myfilename}"
+$(streamer -c "${myv1}" -b "${myv1colors}" -o "${myfilename}")
 
-#
-# Upload taken picture
-#
+# Censor taken picture
 
-scp "${myfilename}" "${mywebserver}":"${myfolderonwebserver}""${mywebpageimg}"
+$(convert "${myfilename}" -gravity NorthEast -draw "image Over  0,0 0,0 '/home/hasi/DAVtPunk/banner.jpg'" "${myfiletemp}")
+
+# Upload censored picture
+
+$(scp "${myfiletemp}" "${mywebserver}":"${myfolderonwebserver}""${mywebpageimg}""${myfilesuffix}")
+
+# Return exit code
 
 exit $?

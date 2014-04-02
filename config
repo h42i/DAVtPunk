@@ -14,12 +14,13 @@
 # web-server
 mywebserver='hasi'
 myfolderonwebserver='/home/h42i/html/kletterhalle/'
-mywebpageimg='latest.jpeg'
+mywebpageimg='latest'
 
-
+# local 
 myfolderonsource='/home/hasi/DAVtPunk/'
 myfileprefix='DAVtPhoto_'
 myfilesuffix='.jpeg'
+
 # video device
 myv1='/dev/video0'
 myv1colors='16'
@@ -29,5 +30,15 @@ myftp='10.23.42.104'
 #wau.hasi
 myftpuser='anonymous'
 myftppass='davtpie@hasi.it'
-myfolderonftp='/media/DAVtPunk'
+myfolderonftp='/media/DAVtPunk/'
+
+# gestern
+mygesternloop=0
+mygesterndelay=100
+
 mydefaultoffset='-1hour'
+
+# shrinktomovie
+myfirstmovie=2014-03-31 
+mylastmovie=2014-03-31
+myftpmovies=mp4

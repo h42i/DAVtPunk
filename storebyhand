@@ -9,12 +9,16 @@
 
 source "./config"
 
+myfoldertoday='DAVtPhoto_'$(date +%Y-%m-%d)'/'
+
 cd "${myfolderonsource}" 
 ftp --no-prompt --no-login --verbose "${myftp}" <<EOF
 quote user "${myftpuser}"
 quote pass "{$myftppass}"
 cd "${myfolderonftp}"
-mput *.*
+mkdir "${myfoldertoday}"
+cd "${myfoldertoday}"
+mput *.jpeg
 bye
 EOF
 
